@@ -2,36 +2,54 @@ open class Game{
 
 
 }
+//Tove
+class Player {
 
-class TicTacToe {
+}
 
 
+//Mats
+class GameBoard{
+
+    private val board = Array(3) { CharArray(3) { '-' } }
+    fun displayBoard() {
+        //Create a 3x3 array to represent the tic-tac-toe board
+        for (i in 0..2) {
+            for (j in 0..2) {
+                print(board[i][j])
+                if (j != 2) print("|")
+            }
+            println()
+            if (i != 2) println("-+-+-")
+        }
+    }
+}
+class TicTacToeGame {
+
+    //Odd
     fun checkRows() {}
 
+    //Odd
     fun checkColumns() {
 
     }
 
+    //Odd
     fun checkDiagonals() {
 
-    }
-
-    fun printGameBoard() {
-        //Create a 3x3 array to represent the tic tac toe board
-        val board = Array(3) { CharArray(3) }
-
-        for (k in board.indices) {
-            for (l in board.indices) {
-                board[k][l] = '-'
-            }
-        }
     }
 
     fun isValidMove(row: Int, column: Int, player: Int) {
 
     }
 
+    fun printGameBoard() {
+        val game = GameBoard()
+        game.displayBoard()
+    }
+}
 
+/*
 // Ask the users for their moves
     while (true) {
         println("Player 1 turn (X):")
@@ -68,4 +86,4 @@ class TicTacToe {
         if (isGameOver(board)) {
             println("Game over!)
 }
-    }
+*/
