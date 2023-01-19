@@ -2,17 +2,18 @@ open class Game{
 
 
 }
-
+//Tove
 class Player {
 
 }
 
 
+//Mats
 class GameBoard{
 
     private val board = Array(3) { CharArray(3) { '-' } }
     fun displayBoard() {
-        //Create a 3x3 array to represent the tic tac toe board
+        //Create a 3x3 array to represent the tic-tac-toe board
         for (i in 0..2) {
             for (j in 0..2) {
                 print(board[i][j])
@@ -42,8 +43,10 @@ class TicTacToeGame {
 
     }
 
-    fun printGameBoard() {
+    fun printGameBoard() {}
+}
 
+/*
 // Ask the users for their moves
     while (true) {
         println("Player 1 turn (X):")
@@ -80,4 +83,4 @@ class TicTacToeGame {
         if (isGameOver(board)) {
             println("Game over!)
 }
-    }
+*/
