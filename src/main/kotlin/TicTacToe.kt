@@ -1,4 +1,6 @@
-open class Game{
+open class Game {
+
+
 
 
 }
@@ -9,9 +11,10 @@ class Player {
 
 
 //Mats
-class GameBoard{
-
-    private val board = Array(3) { CharArray(3) { '-' } }
+open class GameBoard{
+    protected val board = Array(3) {
+        CharArray(3) { '-' }
+    }
     fun displayBoard() {
         //Create a 3x3 array to represent the tic-tac-toe board
         for (i in 0..2) {
@@ -23,8 +26,50 @@ class GameBoard{
             if (i != 2) println("-+-+-")
         }
     }
+    abstract fun play(){
+        TODO("Not yet written")
+
+    }
 }
-class TicTacToeGame {
+class TicTacToeGame: GameBoard() {
+
+    override fun play() {
+        displayBoard()
+        var currentPlayer = 'X'
+        while (true) {
+            println("Player $currentPlayer, make your move (row column):")
+            val move = readln().split(" ")
+            val row = move[0].toInt()
+            val col = move[1].toInt()
+            if (row in 0..2 && col in 0..2 && board[row][col] == '-') {
+                board[row][col] = currentPlayer
+                displayBoard()
+                if (checkForWin(currentPlayer)) {
+                    println("Player $currentPlayer wins!")
+                    return
+                } else if (checkForTie()) {
+                    println("It's a tie!")
+                    return
+                }
+                currentPlayer = if (currentPlayer == 'X') 'O' else 'X'
+            } else {
+                println("Invalid move, try again.")
+            }
+        }
+    }
+
+    private fun checkForWin(player: Char): Boolean {
+        // logic to check for a win, such as checking for three consecutive player characters in a row, column, or diagonal
+        //Her kommer checkRows, CheckColums og CheckDiagonal inn
+        return false
+    }
+
+    private fun checkForTie(): Boolean {
+        // logic to check for a tie, such as checking if all positions on the board are filled and no player has won
+        //Her kommer checkRows, CheckColums og CheckDiagonal inn
+        return false
+    }
+
 
     //Odd
     fun checkRows() {}
