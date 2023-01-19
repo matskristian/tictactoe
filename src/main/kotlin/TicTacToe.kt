@@ -43,7 +43,10 @@ class TicTacToeGame {
 
     }
 
-    fun printGameBoard() {}
+    fun printGameBoard() {
+        val game = GameBoard()
+        game.displayBoard()
+    }
 }
 
 /*
