@@ -51,9 +51,8 @@ class TicTacToeGame: GameBoard() {
 
     override fun play() {
         displayBoard()
-        //var currentPlayer = 'X'
-        var currentPlayer = 0
-        var players = listOf(Player("Tove", "x"),Player("MatsOgOdd","O"))
+        var currentPlayer = 'X'
+
         while (true) {
             println("Player $currentPlayer, make your move (row column):")
             val move = readln().split(" ")
