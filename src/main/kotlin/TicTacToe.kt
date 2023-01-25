@@ -6,12 +6,28 @@ open class Game {
 }
 //Tove
 class Player {
+    var currentPlayer: String = "Player 1"
+    var symbol: String = "X"
+
+    fun switchPlayer(){
+
+    if ((currentPlayer == "Player 1") && (symbol == "X")){
+            currentPlayer = "Player 2"
+            symbol = "O"
+        }
+    else {
+            currentPlayer = "Player 1"
+            symbol = "X"
+        }
+
+
+
 
 }
 
 
 //Mats
-open class GameBoard{
+abstract class GameBoard{
     protected val board = Array(3) {
         CharArray(3) { '-' }
     }
@@ -27,7 +43,7 @@ open class GameBoard{
         }
     }
     abstract fun play(){
-        TODO("Not yet written")
+       TODO("Not yet written")
 
     }
 }
@@ -35,7 +51,9 @@ class TicTacToeGame: GameBoard() {
 
     override fun play() {
         displayBoard()
-        var currentPlayer = 'X'
+        //var currentPlayer = 'X'
+        var currentPlayer = 0
+        var players = listOf(Player("Tove", "x"),Player("MatsOgOdd","O"))
         while (true) {
             println("Player $currentPlayer, make your move (row column):")
             val move = readln().split(" ")
