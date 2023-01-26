@@ -7,17 +7,17 @@ open class Game {
 //Tove
 class Player {
     var currentPlayer: String = "Player 1"
-    var symbol: String = "X"
+    var symbol: Char = 'X'
 
     fun switchPlayer(){
 
-    if ((currentPlayer == "Player 1") && (symbol == "X")){
+    if ((currentPlayer == "Player 1") && (symbol == 'X')){
             currentPlayer = "Player 2"
-            symbol = "O"
+            symbol = 'O'
         }
     else {
             currentPlayer = "Player 1"
-            symbol = "X"
+            symbol = 'X'
         }
 
 
@@ -27,7 +27,7 @@ class Player {
 
 
 //Mats
-abstract class GameBoard{
+open class GameBoard{
     protected val board = Array(3) {
         CharArray(3) { '-' }
     }
@@ -42,16 +42,18 @@ abstract class GameBoard{
             if (i != 2) println("-+-+-")
         }
     }
-    abstract fun play(){
-       TODO("Not yet written")
+    //abstract fun play(){
+      // TODO("Not yet written")
 
-    }
+    //}
 }
 class TicTacToeGame: GameBoard() {
 
-    override fun play() {
-        displayBoard()
-        var currentPlayer = 'X'
+    fun play() {
+         displayBoard()
+        var player = Player()
+        var currentPlayer = player.currentPlayer
+        var currentSymbol = player.symbol
 
         while (true) {
             println("Player $currentPlayer, make your move (row column):")
@@ -59,16 +61,16 @@ class TicTacToeGame: GameBoard() {
             val row = move[0].toInt()
             val col = move[1].toInt()
             if (row in 0..2 && col in 0..2 && board[row][col] == '-') {
-                board[row][col] = currentPlayer
+                board[row][col] = currentSymbol
                 displayBoard()
-                if (checkForWin(currentPlayer)) {
+                if (checkForWin(currentSymbol)) {
                     println("Player $currentPlayer wins!")
                     return
                 } else if (checkForTie()) {
                     println("It's a tie!")
                     return
                 }
-                currentPlayer = if (currentPlayer == 'X') 'O' else 'X'
+                player.switchPlayer()
             } else {
                 println("Invalid move, try again.")
             }
@@ -109,7 +111,7 @@ class TicTacToeGame: GameBoard() {
         val game = GameBoard()
         game.displayBoard()
     }
-}
+}}
 
 /*
 // Ask the users for their moves
