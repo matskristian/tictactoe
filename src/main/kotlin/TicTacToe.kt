@@ -111,7 +111,11 @@ class TicTacToeGame: GameBoard() {
         val game = GameBoard()
         game.displayBoard()
     }
-}}
+}
+}
+fun main(args: Array<String>) {
+
+}
 
 /*
 // Ask the users for their moves
