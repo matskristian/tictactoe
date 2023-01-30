@@ -52,19 +52,17 @@ class TicTacToeGame: GameBoard() {
     fun play() {
          displayBoard()
         var player = Player()
-        var currentPlayer = player.currentPlayer
-        var currentSymbol = player.symbol
 
         while (true) {
-            println("Player $currentPlayer, make your move (row column):")
+            print("${player.currentPlayer}, make your move (row column):")
             val move = readln().split(" ")
             val row = move[0].toInt()
             val col = move[1].toInt()
             if (row in 0..2 && col in 0..2 && board[row][col] == '-') {
-                board[row][col] = currentSymbol
+                board[row][col] = player.symbol
                 displayBoard()
-                if (checkForWin(currentSymbol)) {
-                    println("Player $currentPlayer wins!")
+                if (checkForWin(player.symbol, row, col)) {
+                    println("Player ${player.currentPlayer} wins!")
                     return
                 } else if (checkForTie()) {
                     println("It's a tie!")
@@ -77,10 +75,15 @@ class TicTacToeGame: GameBoard() {
         }
     }
 
-    private fun checkForWin(player: Char): Boolean {
+    private fun checkForWin(symbol: Char, row: Int, col: Int): Boolean {
         // logic to check for a win, such as checking for three consecutive player characters in a row, column, or diagonal
-        //Her kommer checkRows, CheckColums og CheckDiagonal inn
-        return false
+        val playerWon = when {
+            checkRows(row) -> true
+            checkColumns(col) -> true
+            checkDiagonals() -> true
+            else -> false
+        }
+        return playerWon
     }
 
     private fun checkForTie(): Boolean {
@@ -91,16 +94,34 @@ class TicTacToeGame: GameBoard() {
 
 
     //Odd
-    fun checkRows() {}
-
-    //Odd
-    fun checkColumns() {
-
+    private fun checkRows(row: Int): Boolean {
+        return board[row].toSet().size == 1 // unsure whether we need to test for cases when a win is declared due to '-'
     }
 
     //Odd
-    fun checkDiagonals() {
+    private fun checkColumns(col: Int): Boolean {
+        val randomColVal: Char = board[0][col]
+        for (row in board) {
+            if (randomColVal != row[col] ) return false
+        }
+        return true
+    }
 
+    //Odd
+    private fun checkDiagonals(): Boolean {
+        val leftToRightNodes = mutableSetOf(board[0][0])
+        val rightToLeftNodes = mutableSetOf(board[0][board.size-1])
+        var playerWon = false
+        for (i in board.indices) {
+            leftToRightNodes.add(board[i][i])
+            rightToLeftNodes.add(board[i][board.size-1-i])
+        }
+        when {
+            (!leftToRightNodes.contains('-') && leftToRightNodes.size == 1) -> playerWon = true
+            (!rightToLeftNodes.contains('-') && rightToLeftNodes.size == 1) -> playerWon = true
+        }
+
+        return playerWon
     }
 
     fun isValidMove(row: Int, column: Int, player: Int) {
@@ -114,7 +135,7 @@ class TicTacToeGame: GameBoard() {
 }
 }
 fun main(args: Array<String>) {
-
+    Player.TicTacToeGame().play()
 }
 
 /*
