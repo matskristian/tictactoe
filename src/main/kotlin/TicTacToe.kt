@@ -3,15 +3,15 @@ class Player {
     var currentPlayer: String = "Player 1"
     var symbol: Char = 'X'
 
-    fun switchPlayer(){
-    if ((currentPlayer == "Player 1") && (symbol == 'X')){
+    fun switchPlayer() {
+        if ((currentPlayer == "Player 1") && (symbol == 'X')) {
             currentPlayer = "Player 2"
             symbol = 'O'
-        }
-    else {
+        } else {
             currentPlayer = "Player 1"
             symbol = 'X'
         }
+    }
 }
 
 //Mats
@@ -120,9 +120,9 @@ class TicTacToeGame: GameBoard() {
 
     }
 }
-}
+
 fun main(args: Array<String>) {
-    Player.TicTacToeGame().play()
+    TicTacToeGame().play()
 }
 
 /*
