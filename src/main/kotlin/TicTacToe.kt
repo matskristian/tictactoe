@@ -1,4 +1,3 @@
-
 class Player {
     var currentPlayer: String = "Player 1"
     var symbol: Char = 'X'
@@ -15,10 +14,11 @@ class Player {
 }
 
 //Mats
-open class GameBoard{
+open class GameBoard {
     protected val board = Array(3) {
         CharArray(3) { '-' }
     }
+
     fun displayBoard() {
         //Create a 3x3 array to represent the tic-tac-toe board
         for (i in 0..2) {
@@ -31,9 +31,10 @@ open class GameBoard{
         }
     }
 }
-class TicTacToeGame: GameBoard() {
+
+class TicTacToeGame : GameBoard() {
     fun play() {
-         displayBoard()
+        displayBoard()
         var player = Player()
 
         while (true) {
@@ -44,21 +45,21 @@ class TicTacToeGame: GameBoard() {
                 val col = move[1].toInt()
 
 
-            if (row in 0..2 && col in 0..2 && board[row][col] == '-') {
-                board[row][col] = player.symbol
-                displayBoard()
-                if (checkForWin(player.symbol, row, col)) {
-                    println("Player ${player.currentPlayer} wins!")
-                    return
-                } else if (checkForTie()) {
-                    println("It's a tie!")
-                    return
+                if (row in 0..2 && col in 0..2 && board[row][col] == '-') {
+                    board[row][col] = player.symbol
+                    displayBoard()
+                    if (checkForWin(player.symbol, row, col)) {
+                        println("Player ${player.currentPlayer} wins!")
+                        return
+                    } else if (checkForTie()) {
+                        println("It's a tie!")
+                        return
+                    }
+                    player.switchPlayer()
+                } else {
+                    println("The board is already taken, try again.")
                 }
-                player.switchPlayer() }
-            else {
-                println("The board is already taken, try again.")
-            }
-            } catch (e:Exception){
+            } catch (e: Exception) {
                 println("Invalid move, try again")
             }
         }
@@ -76,8 +77,8 @@ class TicTacToeGame: GameBoard() {
     }
 
     private fun checkForTie(): Boolean {
-        for (i in 0..2){
-            for (j in 0..2){
+        for (i in 0..2) {
+            for (j in 0..2) {
                 if (board[i][j] == '-')
                     return false
             }
@@ -94,7 +95,7 @@ class TicTacToeGame: GameBoard() {
     private fun checkColumns(col: Int): Boolean {
         val randomColVal: Char = board[0][col]
         for (row in board) {
-            if (randomColVal != row[col] ) return false
+            if (randomColVal != row[col]) return false
         }
         return true
     }
@@ -102,11 +103,11 @@ class TicTacToeGame: GameBoard() {
     //Odd
     private fun checkDiagonals(): Boolean {
         val leftToRightNodes = mutableSetOf(board[0][0])
-        val rightToLeftNodes = mutableSetOf(board[0][board.size-1])
+        val rightToLeftNodes = mutableSetOf(board[0][board.size - 1])
         var playerWon = false
         for (i in board.indices) {
             leftToRightNodes.add(board[i][i])
-            rightToLeftNodes.add(board[i][board.size-1-i])
+            rightToLeftNodes.add(board[i][board.size - 1 - i])
         }
         when {
             (!leftToRightNodes.contains('-') && leftToRightNodes.size == 1) -> playerWon = true
@@ -124,42 +125,3 @@ class TicTacToeGame: GameBoard() {
 fun main(args: Array<String>) {
     TicTacToeGame().play()
 }
-
-/*
-// Ask the users for their moves
-    while (true) {
-        println("Player 1 turn (X):")
-        val row1 = readLine()!!.toInt()
-        val col1 = readLine()!!.toInt()
-        if (board[row1][col1] == '-') {
-            board[row1][col1] = 'X'
-        } else {
-            println("This move is not valid, please try again")
-            continue
-        }
-
-
-// Check if the game is over
-        if (isGameOver(board)) {
-            println("Game over! Player 1 wins!")
-            break
-        }
-
-
-// Player 2 turn
-        println("Player 2 turn (O):")
-        val row2 = readLine()!!.toInt()
-        val col2 = readLine()!!.toInt()
-        if (board[row2][col2] == '-') {
-            board[row2][col2] = 'O'
-        } else {
-            println("This move is not valid, please try again")
-            continue
-        }
-
-
-// Check if the game is over
-        if (isGameOver(board)) {
-            println("Game over!)
-}
-*/
