@@ -23,11 +23,11 @@ open class GameBoard{
         //Create a 3x3 array to represent the tic-tac-toe board
         for (i in 0..2) {
             for (j in 0..2) {
-                print(board[i][j])
+                print(" ${board[i][j]} ")
                 if (j != 2) print("|")
             }
             println()
-            if (i != 2) println("-+-+-")
+            if (i != 2) println("---+---+---")
         }
     }
 }
