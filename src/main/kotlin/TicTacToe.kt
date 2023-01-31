@@ -37,9 +37,9 @@ class TicTacToeGame: GameBoard() {
         var player = Player()
 
         while (true) {
-            print("${player.currentPlayer}, make your move (row column from 0 to 2):")
+            print("${player.currentPlayer}, make your move (row column from 0 to 2, use comma between numbers ):")
             try {
-                val move = readln().split(" ")
+                val move = readln().split(",")
                 val row = move[0].toInt()
                 val col = move[1].toInt()
 
