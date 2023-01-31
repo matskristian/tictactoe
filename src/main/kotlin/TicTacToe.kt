@@ -16,7 +16,7 @@ class Player {
 //Mats
 open class GameBoard {
     protected val board = Array(3) {
-        CharArray(3) { '-' }
+        CharArray(3) { ' ' }
     }
 
     fun displayBoard() {
@@ -45,7 +45,7 @@ class TicTacToeGame : GameBoard() {
                 val col = move[1].toInt()
 
 
-                if (row in 0..2 && col in 0..2 && board[row][col] == '-') {
+                if (row in 0..2 && col in 0..2 && board[row][col] == ' ') {
                     board[row][col] = player.symbol
                     displayBoard()
                     if (checkForWin(player.symbol, row, col)) {
@@ -79,7 +79,7 @@ class TicTacToeGame : GameBoard() {
     private fun checkForTie(): Boolean {
         for (i in 0..2) {
             for (j in 0..2) {
-                if (board[i][j] == '-')
+                if (board[i][j] == ' ')
                     return false
             }
         }
@@ -88,7 +88,7 @@ class TicTacToeGame : GameBoard() {
 
     //Odd
     private fun checkRows(row: Int): Boolean {
-        return board[row].toSet().size == 1 // unsure whether we need to test for cases when a win is declared due to '-'
+        return board[row].toSet().size == 1 // unsure whether we need to test for cases when a win is declared due to ' '
     }
 
     //Odd
@@ -110,8 +110,8 @@ class TicTacToeGame : GameBoard() {
             rightToLeftNodes.add(board[i][board.size - 1 - i])
         }
         when {
-            (!leftToRightNodes.contains('-') && leftToRightNodes.size == 1) -> playerWon = true
-            (!rightToLeftNodes.contains('-') && rightToLeftNodes.size == 1) -> playerWon = true
+            (!leftToRightNodes.contains(' ') && leftToRightNodes.size == 1) -> playerWon = true
+            (!rightToLeftNodes.contains(' ') && rightToLeftNodes.size == 1) -> playerWon = true
         }
 
         return playerWon
