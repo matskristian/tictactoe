@@ -1,16 +1,9 @@
-open class Game {
-//test
 
-
-
-}
-//Tove
 class Player {
     var currentPlayer: String = "Player 1"
     var symbol: Char = 'X'
 
     fun switchPlayer(){
-
     if ((currentPlayer == "Player 1") && (symbol == 'X')){
             currentPlayer = "Player 2"
             symbol = 'O'
@@ -19,12 +12,7 @@ class Player {
             currentPlayer = "Player 1"
             symbol = 'X'
         }
-
-
-
-
 }
-
 
 //Mats
 open class GameBoard{
@@ -42,22 +30,20 @@ open class GameBoard{
             if (i != 2) println("-+-+-")
         }
     }
-    //abstract fun play(){
-      // TODO("Not yet written")
-
-    //}
 }
 class TicTacToeGame: GameBoard() {
-
     fun play() {
          displayBoard()
         var player = Player()
 
         while (true) {
             print("${player.currentPlayer}, make your move (row column):")
-            val move = readln().split(" ")
-            val row = move[0].toInt()
-            val col = move[1].toInt()
+            try {
+                val move = readln().split(" ")
+                val row = move[0].toInt()
+                val col = move[1].toInt()
+
+
             if (row in 0..2 && col in 0..2 && board[row][col] == '-') {
                 board[row][col] = player.symbol
                 displayBoard()
@@ -68,9 +54,12 @@ class TicTacToeGame: GameBoard() {
                     println("It's a tie!")
                     return
                 }
-                player.switchPlayer()
-            } else {
-                println("Invalid move, try again.")
+                player.switchPlayer() }
+            else {
+                println("The board is already taken, try again.")
+            }
+            } catch (e:IndexOutOfBoundsException){
+                println("Invalid move, try again")
             }
         }
     }
@@ -87,11 +76,14 @@ class TicTacToeGame: GameBoard() {
     }
 
     private fun checkForTie(): Boolean {
-        // logic to check for a tie, such as checking if all positions on the board are filled and no player has won
-        //Her kommer checkRows, CheckColums og CheckDiagonal inn
-        return false
+        for (i in 0..2){
+            for (j in 0..2){
+                if (board[i][j] == '-')
+                    return false
+            }
+        }
+        return true
     }
-
 
     //Odd
     private fun checkRows(row: Int): Boolean {
@@ -126,11 +118,6 @@ class TicTacToeGame: GameBoard() {
 
     fun isValidMove(row: Int, column: Int, player: Int) {
 
-    }
-
-    fun printGameBoard() {
-        val game = GameBoard()
-        game.displayBoard()
     }
 }
 }
