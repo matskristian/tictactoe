@@ -37,7 +37,7 @@ class TicTacToeGame: GameBoard() {
         var player = Player()
 
         while (true) {
-            print("${player.currentPlayer}, make your move (row column):")
+            print("${player.currentPlayer}, make your move (row column from 0 to 2):")
             try {
                 val move = readln().split(" ")
                 val row = move[0].toInt()
@@ -58,7 +58,7 @@ class TicTacToeGame: GameBoard() {
             else {
                 println("The board is already taken, try again.")
             }
-            } catch (e:IndexOutOfBoundsException){
+            } catch (e:Exception){
                 println("Invalid move, try again")
             }
         }
