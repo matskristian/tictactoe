@@ -45,7 +45,7 @@ class TicTacToeGame : GameBoard() {
                 val col = move[1].toInt()
 
 
-                if (row in 0..2 && col in 0..2 && board[row][col] == ' ') {
+                if (isValidMove(row,col)) {
                     board[row][col] = player.symbol
                     displayBoard()
                     if (checkForWin(player.symbol, row, col)) {
@@ -117,8 +117,8 @@ class TicTacToeGame : GameBoard() {
         return playerWon
     }
 
-    fun isValidMove(row: Int, column: Int, player: Int) {
-
+    fun isValidMove(row: Int, col: Int):Boolean {
+        return row in 0..2 && col in 0..2 && board[row][col] == ' '
     }
 }
 
