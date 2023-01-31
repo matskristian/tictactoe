@@ -122,6 +122,6 @@ class TicTacToeGame : GameBoard() {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     TicTacToeGame().play()
 }
