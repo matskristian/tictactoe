@@ -88,7 +88,7 @@ class TicTacToe : Game() {
             exitProcess(1)
         } else {
             println("Invalid input, please try again.")
-            play()
+            playAgain()
         }
         return playAgain
     }
