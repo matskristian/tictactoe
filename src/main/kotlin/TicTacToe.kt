@@ -14,12 +14,12 @@ class Player {
 }
 
 //Mats
-open class GameBoard {
+open class Game {
     protected val board = Array(3) {
         CharArray(3) { ' ' }
     }
 
-    fun displayBoard() {
+    fun GameBoard() {
         //Create a 3x3 array to represent the tic-tac-toe board
         for (i in 0..2) {
             for (j in 0..2) {
@@ -32,9 +32,9 @@ open class GameBoard {
     }
 }
 
-class TicTacToeGame : GameBoard() {
+class TicTacToe : Game() {
     fun play() {
-        displayBoard()
+        GameBoard()
         var player = Player()
 
         while (true) {
@@ -44,12 +44,11 @@ class TicTacToeGame : GameBoard() {
                 val row = move[0].toInt()
                 val col = move[1].toInt()
 
-
                 if (isValidMove(row,col)) {
                     board[row][col] = player.symbol
-                    displayBoard()
-                    if (checkForWin(player.symbol, row, col)) {
-                        println("Player ${player.currentPlayer} wins!")
+                    GameBoard()
+                    if (checkForWin(row, col)) {
+                        println("${player.currentPlayer} wins!")
                         return
                     } else if (checkForTie()) {
                         println("It's a tie!")
@@ -57,7 +56,7 @@ class TicTacToeGame : GameBoard() {
                     }
                     player.switchPlayer()
                 } else {
-                    println("The board is already taken, try again.")
+                    println("The cell is already taken, try again.")
                 }
             } catch (e: Exception) {
                 println("Invalid move, try again")
@@ -65,7 +64,7 @@ class TicTacToeGame : GameBoard() {
         }
     }
 
-    private fun checkForWin(symbol: Char, row: Int, col: Int): Boolean {
+    private fun checkForWin(row: Int, col: Int): Boolean {
         // logic to check for a win, such as checking for three consecutive player characters in a row, column, or diagonal
         val playerWon = when {
             checkRows(row) -> true
@@ -123,5 +122,5 @@ class TicTacToeGame : GameBoard() {
 }
 
 fun main() {
-    TicTacToeGame().play()
+    TicTacToe().play()
 }
