@@ -78,7 +78,7 @@ class TicTacToe : Game() {
                     println("The cell is already taken, try again.")
                 }
             } catch (e: Exception) {
-                println("Invalid move, try again")
+                println("Invalid input, please use comma between numbers and numbers between 0-2")
             }
         }
     }
