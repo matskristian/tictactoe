@@ -1,3 +1,5 @@
+import java.util.*
+
 class Player {
     var currentPlayer: String = "Player 1"
     var symbol: Char = 'X'
@@ -49,9 +51,26 @@ class TicTacToe : Game() {
                     GameBoard()
                     if (checkForWin(row, col)) {
                         println("${player.currentPlayer} wins!")
+                        println("Do you want to play again (yes/no)?")
+                        val playAgain = readln()
+                        if (playAgain.lowercase(Locale.getDefault()) == "yes") {
+                            play()
+                        }
+                        else if (playAgain.lowercase(Locale.getDefault()) == "no") {
+                            println("Thanks for playing Tic-Tac-Toe!")
+                            return
+                        } else {
+                            println("Invalid input, please try again.")
+                            play()
+                        }
                         return
                     } else if (checkForTie()) {
                         println("It's a tie!")
+                        println("Do you want to play again (yes/no)?")
+                        val playAgain = readln()
+                        if (playAgain.lowercase(Locale.getDefault()) == "yes") {
+                            play()
+                        }
                         return
                     }
                     player.switchPlayer()
