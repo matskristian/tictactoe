@@ -1,4 +1,5 @@
 import java.util.*
+import kotlin.system.exitProcess
 
 class Player {
     var currentPlayer: String = "Player 1"
@@ -51,26 +52,11 @@ class TicTacToe : Game() {
                     GameBoard()
                     if (checkForWin(row, col)) {
                         println("${player.currentPlayer} wins!")
-                        println("Do you want to play again (yes/no)?")
-                        val playAgain = readln()
-                        if (playAgain.lowercase(Locale.getDefault()) == "yes") {
-                            play()
-                        }
-                        else if (playAgain.lowercase(Locale.getDefault()) == "no") {
-                            println("Thanks for playing Tic-Tac-Toe!")
-                            return
-                        } else {
-                            println("Invalid input, please try again.")
-                            play()
-                        }
+                        playAgain()
                         return
                     } else if (checkForTie()) {
                         println("It's a tie!")
-                        println("Do you want to play again (yes/no)?")
-                        val playAgain = readln()
-                        if (playAgain.lowercase(Locale.getDefault()) == "yes") {
-                            play()
-                        }
+                        playAgain()
                         return
                     }
                     player.switchPlayer()
@@ -81,6 +67,30 @@ class TicTacToe : Game() {
                 println("Invalid input, please use comma between numbers and numbers between 0-2")
             }
         }
+    }
+
+    private fun resetBoard() {
+        for (i in board.indices) {
+            for (j in 0 until board[i].size) {
+                board[i][j] = ' '
+            }
+        }
+    }
+    private fun playAgain(): String {
+        println("Do you want to play again (yes/no)?")
+        val playAgain = readln()
+        if (playAgain.lowercase(Locale.getDefault()) == "yes") {
+            resetBoard()
+            play()
+        }
+        else if (playAgain.lowercase(Locale.getDefault()) == "no") {
+            println("Thanks for playing Tic-Tac-Toe!")
+            exitProcess(1)
+        } else {
+            println("Invalid input, please try again.")
+            play()
+        }
+        return playAgain
     }
 
     private fun checkForWin(row: Int, col: Int): Boolean {
