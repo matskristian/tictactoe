@@ -1,19 +1,7 @@
 import java.util.*
 import kotlin.system.exitProcess
 
-class Player (val name: String, var symbol: Char)  {
-    //var currentPlayer: String = "Player 1"
-    //var symbol: Char = 'X'
-
-    //fun switchPlayer() {
-      //  if ((currentPlayer == "Player 1") && (symbol == 'X')) {
-        //    currentPlayer = "Player 2"
-          //  symbol = 'O'
-        //} else {
-          //  currentPlayer = "Player 1"
-            //symbol = 'X'
-        //}
-    //}
+class Player (val name: String, val symbol: Char)  {
 }
 
 //Mats
