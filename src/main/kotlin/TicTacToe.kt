@@ -1,19 +1,19 @@
 import java.util.*
 import kotlin.system.exitProcess
 
-class Player {
-    var currentPlayer: String = "Player 1"
-    var symbol: Char = 'X'
+class Player (val name: String, var symbol: Char)  {
+    //var currentPlayer: String = "Player 1"
+    //var symbol: Char = 'X'
 
-    fun switchPlayer() {
-        if ((currentPlayer == "Player 1") && (symbol == 'X')) {
-            currentPlayer = "Player 2"
-            symbol = 'O'
-        } else {
-            currentPlayer = "Player 1"
-            symbol = 'X'
-        }
-    }
+    //fun switchPlayer() {
+      //  if ((currentPlayer == "Player 1") && (symbol == 'X')) {
+        //    currentPlayer = "Player 2"
+          //  symbol = 'O'
+        //} else {
+          //  currentPlayer = "Player 1"
+            //symbol = 'X'
+        //}
+    //}
 }
 
 //Mats
@@ -38,20 +38,24 @@ open class Game {
 class TicTacToe : Game() {
     fun play() {
         GameBoard()
-        var player = Player()
+        val player1 = Player("Player 1", 'X')
+        val player2 = Player("Player 2", 'O')
+
+        var currentPlayer = player1
+
 
         while (true) {
-            print("${player.currentPlayer}, make your move (row column from 0 to 2, use comma between numbers ):")
+            print("${currentPlayer.name}, make your move (row column from 0 to 2, use comma between numbers ):")
             try {
                 val move = readln().split(",")
                 val row = move[0].toInt()
                 val col = move[1].toInt()
 
                 if (isValidMove(row,col)) {
-                    board[row][col] = player.symbol
+                    board[row][col] = currentPlayer.symbol
                     GameBoard()
                     if (checkForWin(row, col)) {
-                        println("${player.currentPlayer} wins!")
+                        println("${currentPlayer.name} wins!")
                         playAgain()
                         return
                     } else if (checkForTie()) {
@@ -59,7 +63,9 @@ class TicTacToe : Game() {
                         playAgain()
                         return
                     }
-                    player.switchPlayer()
+                    if (currentPlayer == player1)
+                        currentPlayer = player2
+                    else currentPlayer = player1
                 } else {
                     println("The cell is already taken, try again.")
                 }
